@@ -14,7 +14,7 @@ TEST_CASE("Create a small tree", "[constructor]") {
     tree.add("1",1);
     tree.add("0",2);
     CHECK(tree.getNumberOfNodes() == 3);
-    CHECK(tree.getHeight() == 1);
+    CHECK(tree.getHeight() == 2);
 }
 // To DO
 
@@ -58,3 +58,16 @@ TEST_CASE("TreeNode constructors", "[treeNode]") {
     CHECK(node1.isLeaf() == true);
     CHECK(node2.isLeaf() == true);
 }   
+
+TEST_CASE("Test constructor functions of prefixTree", "[PrefixTree]") {
+
+    prefixTree myTree;
+
+    CHECK(myTree.isEmpty() == true);
+
+    //return the height of the prefix tree
+    CHECK(myTree.getHeight() == 0); //get height causes seg fault
+
+    //return the number of nodes in the prefix tree
+    CHECK(myTree.getNumberOfNodes() == 0);
+}
