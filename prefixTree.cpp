@@ -13,8 +13,9 @@
 
 prefixTree::prefixTree() 
 {
-	//the root pointer should be initialized to nullptr
-	rootPtr = nullptr;
+	//the root pointer should be the default treeNode
+	treeNode root;
+	rootPtr = std::make_shared<treeNode>(root);
 }  // end default constructor
 
 int prefixTree::shortestPrefixIndex(std::vector<std::string> netids){
@@ -91,7 +92,6 @@ prefixTree::~prefixTree()
 
 /**
  * @brief add a new routing entry (netid, port) to the prefixTree.
- * @details because we are passing in order of shortest to longest, incoming nodes will always be leaf nodes
  * a child node should be contain it's parent node's network id as a prefix
  * it is a left child if it has a 0 at the end of the network id, and a right child if it has a 1 at the end of the network id
 */
@@ -108,6 +108,11 @@ bool prefixTree::add(const std::string netid, const int port) {
         std::shared_ptr<treeNode> currentNode = rootPtr;
 
         while (true) {
+			//if at any point the netid's are equal, then update the port number
+			if (currentNode->getNetId() == newNode->getNetId()) {
+				currentNode->setPort(newNode->getPort());
+				return true;
+			}
             // Check if the new node's netid is a prefix of the current node's netid
 			if (newNode->getNetId().find(currentNode->getNetId()) == 0) {
                 // If the last character of the new node's netid is '0', add it as a left child
@@ -128,8 +133,22 @@ bool prefixTree::add(const std::string netid, const int port) {
                         currentNode = currentNode->getRightChildPtr();
                     }
                 }
-            } else {
-                return false; // The new node's netid is not a prefix of any node in the tree
+            } else { //if we can't find a valid parent, then the new node becomes the root node
+				std::shared_ptr<treeNode> temp = rootPtr;
+				rootPtr = newNode;
+				if (temp->getNetId() != "") {
+					if (temp->getNetId().back() == '0') {
+						rootPtr->setLeftChildPtr(temp);
+						return true;
+					}
+					else if (temp->getNetId().back() == '1') {
+						rootPtr->setRightChildPtr(temp);
+						return true;
+					}
+				}
+				//because both the old root and the new root are empty, potentially update the port number
+				rootPtr->setPort(newNode->getPort());
+				return false; //if the old root was empty, and the new root is empty, then we return false
             }
         }
     }
@@ -137,34 +156,37 @@ bool prefixTree::add(const std::string netid, const int port) {
 
 int prefixTree::findPort(std::string ipaddr) const
 {
-	//traverse the tree to find the longest matching prefix
+	//find the longest (lowest level) netid that is a prefix of the ipaddr
+	//return the port number of that netid
+	//if no netid is a prefix of the ipaddr, return -1
 	std::shared_ptr<treeNode> currentNode = rootPtr;
-	std::shared_ptr<treeNode> parentNode = nullptr;
+	std::string longestPrefix = "";
 	while (currentNode != nullptr) {
-		//if the current node is a leaf node, return the port number
-		if (currentNode->isLeaf()) {
-			return currentNode->getPort();
+		if (currentNode->getNetId() == "") {
+			return -1;
 		}
-		//otherwise, check the children of the current node
-		//left child
-		if (ipaddr.find(currentNode->getLeftChildPtr()->getNetId()) != std::string::npos) {
-			//if the ip address contains the current node's network id, then the current node is a valid parent, but we need to check its children
-			currentNode = currentNode->getLeftChildPtr();
+		if (ipaddr.find(currentNode->getNetId()) == 0) {
+			//if the current node's netid is a prefix of the ipaddr, then update the longest prefix
+			longestPrefix = currentNode->getNetId();
+			//check if the current node is a leaf node
+			if (currentNode->isLeaf()) {
+				//if the current node is a leaf node, then the longest prefix has been found
+				return currentNode->getPort(); 
+			}
+			//otherwise traverse the tree to the next level
+			else {
+				if (ipaddr[currentNode->getNetId().length()] == '0') { //if the next character of the ipaddr is a 0, then the next node is the left child
+					currentNode = currentNode->getLeftChildPtr(); 
+				}
+				else if (ipaddr[currentNode->getNetId().length()] == '1') { //if the next character of the ipaddr is a 1, then the next node is the right child
+					currentNode = currentNode->getRightChildPtr(); 
+				}
+			}
 		}
-		else if (ipaddr.find(currentNode->getRightChildPtr()->getNetId()) != std::string::npos) {
-			//if the ip address contains the current node's network id, then the current node is a valid parent, but we need to check its children
-			currentNode = currentNode->getRightChildPtr();
-		}
-		else {
-			//if the ip address does not contain the current node's network id, then the current node is not a valid parent
-			//the parent node is the previous node
-			parentNode = currentNode;
-			break;
+		else { //if the current node is not a prefix then the longest prefix has been found
+			return currentNode->getPort(); 
 		}
 	}
-	//if we get here, we have found the longest matching prefix
-	//return the port number of the parent node
-	return parentNode->getPort();	
 }
 
 
