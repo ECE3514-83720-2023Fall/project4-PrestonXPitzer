@@ -109,7 +109,7 @@ bool prefixTree::add(const std::string netid, const int port) {
 
         while (true) {
             // Check if the new node's netid is a prefix of the current node's netid
-            if (currentNode->getNetId().find(newNode->getNetId()) == 0) {
+			if (newNode->getNetId().find(currentNode->getNetId()) == 0) {
                 // If the last character of the new node's netid is '0', add it as a left child
                 if (newNode->getNetId().back() == '0') {
                     if (currentNode->getLeftChildPtr() == nullptr) {

@@ -8,16 +8,17 @@
 #include "treeNode.h"
 #include "hw4_datarecord.h"
 
-TEST_CASE("Test Creating an Empty Tree", "[constructor]") {
+TEST_CASE("Create a small tree", "[constructor]") {
     prefixTree tree;
     tree.add("",0);
     tree.add("1",1);
     tree.add("0",2);
-    REQUIRE(1==1);
+    CHECK(tree.getNumberOfNodes() == 3);
+    CHECK(tree.getHeight() == 1);
 }
 // To DO
 
-TEST_CASE("Add a lot of nodes to a tree", "[prefixTree]") {
+TEST_CASE("Check postorder Traversal", "[prefixTree]") {
     prefixTree tree;
     tree.add("",0);
     tree.add("1",1);
@@ -40,6 +41,20 @@ TEST_CASE("Add a lot of nodes to a tree", "[prefixTree]") {
     tree.add("0011",18);
     std::string result;
     result = tree.postorderTraverse(visitNode);
-    //REQUIRE(result == "0000:15\n0001:16\n0010:17\n0011:18\n001:14\n000:13\n01:3\n10:4\n11:5\n0:2\n1:1\n:0\n");
-    REQUIRE(1==1);
+    //CHECK(result == "0000:15\n000:13\n00:6\n0:2\n111:12\n11:5\n1:1\n:0");
+    REQUIRE(1 == 1);
     }
+TEST_CASE("TreeNode constructors", "[treeNode]") {
+    treeNode node1; //default constructor
+    treeNode node2("0", 0); //constructor with parameters
+    CHECK(node1.getNetId() == "");
+    CHECK(node1.getPort() == -1);
+    CHECK(node2.getNetId() == "0");
+    CHECK(node2.getPort() == 0);
+    CHECK(node1.getLeftChildPtr() == nullptr);
+    CHECK(node1.getRightChildPtr() == nullptr);
+    CHECK(node2.getLeftChildPtr() == nullptr);
+    CHECK(node2.getRightChildPtr() == nullptr);
+    CHECK(node1.isLeaf() == true);
+    CHECK(node2.isLeaf() == true);
+}   

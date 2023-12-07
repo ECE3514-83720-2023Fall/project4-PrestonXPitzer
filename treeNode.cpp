@@ -5,8 +5,10 @@
 
 
 treeNode::treeNode() {
-	treeNode("", -1);
-	
+	rtEntry.netId = "";
+	rtEntry.port = -1;
+	leftChildPtr = nullptr;
+	rightChildPtr = nullptr;
 }
 
 treeNode::treeNode(const std::string netId_in,  int port_in) {
