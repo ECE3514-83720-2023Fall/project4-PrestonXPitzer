@@ -13,9 +13,7 @@
 
 prefixTree::prefixTree() 
 {
-	//the root pointer should be the default treeNode
-	treeNode root;
-	rootPtr = std::make_shared<treeNode>(root);
+	rootPtr = nullptr;
 }  // end default constructor
 
 int prefixTree::shortestPrefixIndex(std::vector<std::string> netids){
@@ -162,7 +160,7 @@ int prefixTree::findPort(std::string ipaddr) const
 	std::shared_ptr<treeNode> currentNode = rootPtr;
 	std::string longestPrefix = "";
 	while (currentNode != nullptr) {
-		if (currentNode->getNetId() == "") {
+		if (isEmpty()) {
 			return -1;
 		}
 		if (ipaddr.find(currentNode->getNetId()) == 0) {

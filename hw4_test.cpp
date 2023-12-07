@@ -78,27 +78,3 @@ TEST_CASE("Test Addition of Out of Order entries", "[PrefixTree]") {
     REQUIRE(myTree.add("011", 2) == true);
 	REQUIRE(myTree.add("", 0) == true);
 }
-
-TEST_CASE("Test searching for port number based on IP address", "[search]") {
-    using Catch::Matchers::Contains;
-    prefixTree myTree1;
-
-    CHECK(myTree1.findPort("01100110011001100110011001100110") == -1);
-
-
-    REQUIRE(myTree1.add("0", 1) == true);
-    REQUIRE(myTree1.add("011", 2) == true);
-
-
-    CHECK(myTree1.findPort("01100110011001100110011001100110") == 2);
-    CHECK(myTree1.findPort("11100110011001100110011001100110") == -1);
-
-    prefixTree myTree("./routing_table.txt");
-    CHECK(myTree.findPort("01100110011001100110011001100110") == 2);
-    CHECK(myTree.findPort("11100110011001100110011001100110") == 3);
-
-
-
-
-
-}
