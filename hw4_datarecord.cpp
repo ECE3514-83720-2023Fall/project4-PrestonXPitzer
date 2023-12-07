@@ -8,6 +8,7 @@ std::string visitNode(std::shared_ptr<treeNode> nodePtr) {
 	buildString += nodePtr->getNetId();
 	buildString += ":";
 	buildString += std::to_string(nodePtr->getPort());
+	buildString += "\n";
 	return buildString;
 }
 /**
@@ -22,5 +23,6 @@ std::string visitRoutingEntry(std::shared_ptr<treeNode> nodePtr) {
 	buildString += nodePtr->getNetId();
 	buildString += ":";
 	buildString += std::to_string(nodePtr->getPort());
+	buildString += "\n";
 	return buildString;
 }
