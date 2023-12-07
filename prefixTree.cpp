@@ -96,47 +96,43 @@ prefixTree::~prefixTree()
  * it is a left child if it has a 0 at the end of the network id, and a right child if it has a 1 at the end of the network id
 */
 bool prefixTree::add(const std::string netid, const int port) {
-	if (rootPtr == nullptr) {
-		//if the prefix tree is empty, create a new node and make it the root node
-		rootPtr = std::make_shared<treeNode>(netid, port);
-		return true;
-	}
-	else {
-		//create a new node
-		std::shared_ptr<treeNode> newNode = std::make_shared<treeNode>(netid, port);
-		//traverse the tree to find the parent node of the new node
-		std::shared_ptr<treeNode> currentNode = rootPtr;
-		std::shared_ptr<treeNode> parentNode = nullptr;
+    // Create a new node
+    std::shared_ptr<treeNode> newNode = std::make_shared<treeNode>(netid, port);
 
-		while (currentNode != nullptr) {
-			//otherwise, check the children of the current node
-			//left child
-			if (newNode->getNetId().find(currentNode->getLeftChildPtr()->getNetId()) != std::string::npos) {
-				//if the new node's network id contains the current node's network id, then the current node is a valid parent, but we need to check its children
-				currentNode = currentNode->getLeftChildPtr();
-			}
-			else if (newNode->getNetId().find(currentNode->getRightChildPtr()->getNetId()) != std::string::npos) {
-				//if the new node's network id contains the current node's network id, then the current node is a valid parent, but we need to check its children
-				currentNode = currentNode->getRightChildPtr();
-			}
-			else {
-				//if the new node's network id does not contain the current node's network id, then the current node is not a valid parent
-				//the parent node is the previous node
-				parentNode = currentNode;
-				break;
-			}
-		}
-		//check if the new node should be a left child or a right child
-		if (newNode->getNetId().back() == '0') {
-			//if the new node's network id ends with a 0, it should be a left child
-			parentNode->setLeftChildPtr(newNode);
-		}
-		else {
-			//if the new node's network id ends with a 1, it should be a right child
-			parentNode->setRightChildPtr(newNode);
-		}
-		return true;
-	}
+    if (rootPtr == nullptr) {
+        // If the prefix tree is empty, create a new node and make it the root node
+        rootPtr = newNode;
+        return true;
+    } else {
+        // Traverse the tree to find the parent node of the new node
+        std::shared_ptr<treeNode> currentNode = rootPtr;
+
+        while (true) {
+            // Check if the new node's netid is a prefix of the current node's netid
+            if (currentNode->getNetId().find(newNode->getNetId()) == 0) {
+                // If the last character of the new node's netid is '0', add it as a left child
+                if (newNode->getNetId().back() == '0') {
+                    if (currentNode->getLeftChildPtr() == nullptr) {
+                        currentNode->setLeftChildPtr(newNode);
+                        return true;
+                    } else {
+                        currentNode = currentNode->getLeftChildPtr();
+                    }
+                }
+                // If the last character of the new node's netid is '1', add it as a right child
+                else if (newNode->getNetId().back() == '1') {
+                    if (currentNode->getRightChildPtr() == nullptr) {
+                        currentNode->setRightChildPtr(newNode);
+                        return true;
+                    } else {
+                        currentNode = currentNode->getRightChildPtr();
+                    }
+                }
+            } else {
+                return false; // The new node's netid is not a prefix of any node in the tree
+            }
+        }
+    }
 }
 
 int prefixTree::findPort(std::string ipaddr) const
