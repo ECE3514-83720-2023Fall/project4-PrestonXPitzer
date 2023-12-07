@@ -1,0 +1,74 @@
+[
+{
+  "directory": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++11 -o CMakeFiles\\unit_tests.dir\\hw4_test.cpp.obj -c C:\\Users\\coach\\Desktop\\3514\\project4-PrestonXPitzer\\hw4_test.cpp",
+  "file": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/hw4_test.cpp",
+  "output": "CMakeFiles/unit_tests.dir/hw4_test.cpp.obj"
+},
+{
+  "directory": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++11 -o CMakeFiles\\unit_tests.dir\\treeNode.cpp.obj -c C:\\Users\\coach\\Desktop\\3514\\project4-PrestonXPitzer\\treeNode.cpp",
+  "file": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/treeNode.cpp",
+  "output": "CMakeFiles/unit_tests.dir/treeNode.cpp.obj"
+},
+{
+  "directory": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++11 -o CMakeFiles\\unit_tests.dir\\prefixTree.cpp.obj -c C:\\Users\\coach\\Desktop\\3514\\project4-PrestonXPitzer\\prefixTree.cpp",
+  "file": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/prefixTree.cpp",
+  "output": "CMakeFiles/unit_tests.dir/prefixTree.cpp.obj"
+},
+{
+  "directory": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++11 -o CMakeFiles\\unit_tests.dir\\hw4_datarecord.cpp.obj -c C:\\Users\\coach\\Desktop\\3514\\project4-PrestonXPitzer\\hw4_datarecord.cpp",
+  "file": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/hw4_datarecord.cpp",
+  "output": "CMakeFiles/unit_tests.dir/hw4_datarecord.cpp.obj"
+},
+{
+  "directory": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++11 -o CMakeFiles\\instructor_tests.dir\\.github\\instructor_tests.cpp.obj -c C:\\Users\\coach\\Desktop\\3514\\project4-PrestonXPitzer\\.github\\instructor_tests.cpp",
+  "file": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/.github/instructor_tests.cpp",
+  "output": "CMakeFiles/instructor_tests.dir/.github/instructor_tests.cpp.obj"
+},
+{
+  "directory": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++11 -o CMakeFiles\\instructor_tests.dir\\treeNode.cpp.obj -c C:\\Users\\coach\\Desktop\\3514\\project4-PrestonXPitzer\\treeNode.cpp",
+  "file": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/treeNode.cpp",
+  "output": "CMakeFiles/instructor_tests.dir/treeNode.cpp.obj"
+},
+{
+  "directory": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++11 -o CMakeFiles\\instructor_tests.dir\\prefixTree.cpp.obj -c C:\\Users\\coach\\Desktop\\3514\\project4-PrestonXPitzer\\prefixTree.cpp",
+  "file": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/prefixTree.cpp",
+  "output": "CMakeFiles/instructor_tests.dir/prefixTree.cpp.obj"
+},
+{
+  "directory": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++11 -o CMakeFiles\\instructor_tests.dir\\hw4_datarecord.cpp.obj -c C:\\Users\\coach\\Desktop\\3514\\project4-PrestonXPitzer\\hw4_datarecord.cpp",
+  "file": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/hw4_datarecord.cpp",
+  "output": "CMakeFiles/instructor_tests.dir/hw4_datarecord.cpp.obj"
+},
+{
+  "directory": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++11 -o CMakeFiles\\hw4_main.dir\\hw4_main.cpp.obj -c C:\\Users\\coach\\Desktop\\3514\\project4-PrestonXPitzer\\hw4_main.cpp",
+  "file": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/hw4_main.cpp",
+  "output": "CMakeFiles/hw4_main.dir/hw4_main.cpp.obj"
+},
+{
+  "directory": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++11 -o CMakeFiles\\hw4_main.dir\\treeNode.cpp.obj -c C:\\Users\\coach\\Desktop\\3514\\project4-PrestonXPitzer\\treeNode.cpp",
+  "file": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/treeNode.cpp",
+  "output": "CMakeFiles/hw4_main.dir/treeNode.cpp.obj"
+},
+{
+  "directory": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++11 -o CMakeFiles\\hw4_main.dir\\prefixTree.cpp.obj -c C:\\Users\\coach\\Desktop\\3514\\project4-PrestonXPitzer\\prefixTree.cpp",
+  "file": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/prefixTree.cpp",
+  "output": "CMakeFiles/hw4_main.dir/prefixTree.cpp.obj"
+},
+{
+  "directory": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=gnu++11 -o CMakeFiles\\hw4_main.dir\\hw4_datarecord.cpp.obj -c C:\\Users\\coach\\Desktop\\3514\\project4-PrestonXPitzer\\hw4_datarecord.cpp",
+  "file": "C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/hw4_datarecord.cpp",
+  "output": "CMakeFiles/hw4_main.dir/hw4_datarecord.cpp.obj"
+}
+]

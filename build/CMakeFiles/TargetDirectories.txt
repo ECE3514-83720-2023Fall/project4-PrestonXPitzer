@@ -1,0 +1,6 @@
+C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build/CMakeFiles/unit_tests.dir
+C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build/CMakeFiles/instructor_tests.dir
+C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build/CMakeFiles/hw4_main.dir
+C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build/CMakeFiles/test.dir
+C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build/CMakeFiles/edit_cache.dir
+C:/Users/coach/Desktop/3514/project4-PrestonXPitzer/build/CMakeFiles/rebuild_cache.dir

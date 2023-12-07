@@ -6,6 +6,7 @@
 #include <memory>
 #include <stdexcept>
 #include <string>
+#include <vector>
 
 
 class TargetNotFoundException : public std::exception
@@ -39,6 +40,8 @@ protected:
    int getHeightHelper(std::shared_ptr<treeNode> subTreePtr) const;
    
    int getNumberOfNodesHelper(std::shared_ptr<treeNode> subTreePtr) const;
+
+   int shortestPrefixIndex(std::vector<std::string> netids);
  
    
   std::string postorderTraverseHelper(std::string visit(std::shared_ptr<treeNode> NodePtr), std::shared_ptr<treeNode> treePtr) const;

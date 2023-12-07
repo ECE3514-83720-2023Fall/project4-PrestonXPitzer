@@ -5,7 +5,7 @@
 #include<memory>
 
 
-void main() {
+int main() {
 	prefixTree myTree("routing_table.txt");
 	
 	std::cout << "-------------Tree ----------------------\n\n";
@@ -15,6 +15,8 @@ void main() {
 
 	std::cout<<"end of the program \n";
 	std::cin.get();
+
+	return 0;
 
 }
 

@@ -9,9 +9,7 @@
 #include "hw4_datarecord.h"
 
 TEST_CASE("Test Creating an Empty Tree", "[constructor]") {
-	
-	
-
-
+    prefixTree tree;
+    REQUIRE(1==1);
 }
 // To DO
