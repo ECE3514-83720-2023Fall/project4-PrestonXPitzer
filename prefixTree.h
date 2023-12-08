@@ -42,10 +42,15 @@ protected:
    int getNumberOfNodesHelper(std::shared_ptr<treeNode> subTreePtr) const;
 
    int shortestPrefixIndex(std::vector<std::string> netids);
+
+   //return 0 if the current node would be on the left of the target, 1 if the current node would be on the right, -1 if the current should be a parent of the target
+   int checkValue(std::shared_ptr<treeNode> current, std::shared_ptr<treeNode> target);
  
-   
+   std::shared_ptr<treeNode> addHelper(std::shared_ptr<treeNode> subTreePtr, std::shared_ptr<treeNode> newNodePtr);
+
   std::string postorderTraverseHelper(std::string visit(std::shared_ptr<treeNode> NodePtr), std::shared_ptr<treeNode> treePtr) const;
 
+  std::shared_ptr<treeNode> findLongestValidParent(std::shared_ptr<treeNode> target, std::shared_ptr<treeNode> root);
    
 public:
 	//All the public methods listed in the starter code must be implemented by you.  
