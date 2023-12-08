@@ -78,3 +78,48 @@ TEST_CASE("Test Addition of Out of Order entries", "[PrefixTree]") {
     REQUIRE(myTree.add("011", 2) == true);
 	REQUIRE(myTree.add("", 0) == true);
 }
+
+TEST_CASE("Test Addition of Multiple Entries to the Prefix Tree", "[Add]") {
+
+    prefixTree myTree;
+
+    REQUIRE(myTree.add("", 0) == true);
+
+
+    REQUIRE(myTree.isEmpty() == false);
+    CHECK(myTree.getHeight() == 1);
+    CHECK(myTree.getNumberOfNodes() == 1);
+
+    REQUIRE(myTree.add("011", 2) == true);
+    REQUIRE(myTree.add("1", 3) == true);
+
+
+    CHECK(myTree.getHeight() == 2);
+    CHECK(myTree.getNumberOfNodes() == 3);
+
+    std::string str1 = "011:2\n1:3\n:0\n";
+    std::cout << myTree.postorderTraverse(visitNode) << std::endl;
+    CHECK(str1.compare(myTree.postorderTraverse(visitNode)) == 0);
+
+    REQUIRE(myTree.add("011", 4) == true);
+    str1 = "011:4\n1:3\n:0\n";
+    std::cout << myTree.postorderTraverse(visitNode) << std::endl;
+    CHECK(str1.compare(myTree.postorderTraverse(visitNode)) == 0);
+
+    REQUIRE(myTree.add("0001", 5) == true);
+    CHECK(myTree.getHeight() == 3);
+    CHECK(myTree.getNumberOfNodes() == 5);
+
+    str1 = "0001:5\n011:4\n0:-1\n1:3\n:0\n";
+    CHECK(str1.compare(myTree.postorderTraverse(visitNode)) == 0);
+    str1 = "0001:5\n011:4\n1:3\n:0\n";
+    CHECK(str1.compare(myTree.postorderTraverse(visitRoutingEntry)) == 0);
+
+    REQUIRE(myTree.add("0", 1) == true);
+    CHECK(myTree.getHeight() == 3);
+    CHECK(myTree.getNumberOfNodes() == 5);
+
+    str1 = "0001:5\n011:4\n0:1\n1:3\n:0\n";
+    CHECK(str1.compare(myTree.postorderTraverse(visitNode)) == 0);
+
+}

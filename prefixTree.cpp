@@ -16,7 +16,7 @@ prefixTree::prefixTree()
 	rootPtr = nullptr;
 }  // end default constructor
 
-int prefixTree::shortestPrefixIndex(std::vector<std::string> netids){
+int prefixTree::shortestPrefixIndex(std::vector<std::string> netids) {
 	std::string shortest = netids[0];
 	int shortestIndex = 0;
 	for (int i = 1; i < netids.size(); i++) {
@@ -94,63 +94,83 @@ prefixTree::~prefixTree()
  * it is a left child if it has a 0 at the end of the network id, and a right child if it has a 1 at the end of the network id
 */
 bool prefixTree::add(const std::string netid, const int port) {
-    // Create a new node
-    std::shared_ptr<treeNode> newNode = std::make_shared<treeNode>(netid, port);
-
-    if (rootPtr == nullptr) {
-        // If the prefix tree is empty, create a new node and make it the root node
-        rootPtr = newNode;
-        return true;
-    } else {
-        // Traverse the tree to find the parent node of the new node
-        std::shared_ptr<treeNode> currentNode = rootPtr;
-
-        while (true) {
-			//if at any point the netid's are equal, then update the port number
-			if (currentNode->getNetId() == newNode->getNetId()) {
-				currentNode->setPort(newNode->getPort());
-				return true;
-			}
-            // Check if the new node's netid is a prefix of the current node's netid
-			if (newNode->getNetId().find(currentNode->getNetId()) == 0) {
-                // If the last character of the new node's netid is '0', add it as a left child
-                if (newNode->getNetId().back() == '0') {
-                    if (currentNode->getLeftChildPtr() == nullptr) {
-                        currentNode->setLeftChildPtr(newNode);
-                        return true;
-                    } else {
-                        currentNode = currentNode->getLeftChildPtr();
-                    }
-                }
-                // If the last character of the new node's netid is '1', add it as a right child
-                else if (newNode->getNetId().back() == '1') {
-                    if (currentNode->getRightChildPtr() == nullptr) {
-                        currentNode->setRightChildPtr(newNode);
-                        return true;
-                    } else {
-                        currentNode = currentNode->getRightChildPtr();
-                    }
-                }
-            } else { //if we can't find a valid parent, then the new node becomes the root node
-				std::shared_ptr<treeNode> temp = rootPtr;
-				rootPtr = newNode;
-				if (temp->getNetId() != "") {
-					if (temp->getNetId().back() == '0') {
-						rootPtr->setLeftChildPtr(temp);
-						return true;
-					}
-					else if (temp->getNetId().back() == '1') {
-						rootPtr->setRightChildPtr(temp);
-						return true;
-					}
-				}
-				//because both the old root and the new root are empty, potentially update the port number
-				rootPtr->setPort(newNode->getPort());
-				return false; //if the old root was empty, and the new root is empty, then we return false
-            }
-        }
-    }
+	std::shared_ptr<treeNode> newNodePtr = std::make_shared<treeNode>(netid, port);
+	if (isEmpty()) {
+		rootPtr = newNodePtr;
+		return true;
+	}
+	rootPtr = addHelper(rootPtr, newNodePtr);
+	return true;
 }
+
+std::shared_ptr<treeNode> prefixTree::addHelper(std::shared_ptr<treeNode> subTreePtr, std::shared_ptr<treeNode> newNodePtr) {
+	if (subTreePtr == nullptr) {
+		return newNodePtr;
+	}
+
+	int result = checkValue(newNodePtr, subTreePtr);
+	if (result == -1) { //if the nodes have equal netids, then update the port number
+		subTreePtr->setPort(newNodePtr->getPort()); 
+		return subTreePtr; 
+		
+	}
+	if (result == 1) {
+		subTreePtr->setRightChildPtr(addHelper(subTreePtr->getRightChildPtr(), newNodePtr));
+	}
+	else if (result == 0) {
+		subTreePtr->setLeftChildPtr(addHelper(subTreePtr->getLeftChildPtr(), newNodePtr));
+	}
+
+	return subTreePtr;
+}
+
+int prefixTree::checkValue(std::shared_ptr<treeNode> current, std::shared_ptr<treeNode> target) {
+	std::string currId = current->getNetId();
+	std::string targetId = target->getNetId();
+	if (currId == targetId) {
+		return -1;
+	}
+	if (currId.compare(0, targetId.length(), targetId) == 0) {
+		if (currId.back() == '1') {
+			return 1;
+		}
+		else if (currId.back() == '0') {
+			return 0;
+		}
+	}
+
+	// Add a case for an invalid condition, or return a default value
+	return 2;
+}
+
+
+//recursively traverse the tree to find the parent node of the new node
+std::shared_ptr<treeNode> prefixTree::findLongestValidParent(std::shared_ptr<treeNode> target, std::shared_ptr<treeNode> root) {
+	if (root->isLeaf()) {
+		//if the root node is a leaf, then it is the longest valid parent
+		return root;
+	}
+	else {
+		//otherwise traverse the tree to the next level
+		if (target->getNetId().find(root->getNetId()) == 0) {
+			//if the target node's netid is a prefix of the current node's netid, then the target node is a child of the current node
+			if (target->getNetId().find(root->getLeftChildPtr() == 0)) {
+				//recursively call the function on the left child
+				return findLongestValidParent(target, root->getLeftChildPtr());
+			}
+			else if (target->getNetId().find(root->getRightChildPtr() == 0)) {
+				//recursively call the function on the right child
+				return findLongestValidParent(target, root->getRightChildPtr());
+			}
+			else {
+				//if the target node is not a child of the current node, then the current node is the longest valid parent
+				return root;
+			}
+
+		}
+	}
+}
+
 
 int prefixTree::findPort(std::string ipaddr) const
 {
