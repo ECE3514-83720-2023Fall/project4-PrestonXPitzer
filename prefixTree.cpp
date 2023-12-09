@@ -99,6 +99,10 @@ bool prefixTree::add(const std::string netid, const int port) {
 		rootPtr = newNodePtr;
 		return true;
 	}
+	if (rootPtr->getNetId() == "" && netid == "") {
+		rootPtr->setPort(port);
+		return true;
+	}
 	rootPtr = addHelper(rootPtr, newNodePtr);
 	return true;
 }

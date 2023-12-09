@@ -48,9 +48,11 @@ protected:
  
    std::shared_ptr<treeNode> addHelper(std::shared_ptr<treeNode> subTreePtr, std::shared_ptr<treeNode> newNodePtr);
 
-  std::string postorderTraverseHelper(std::string visit(std::shared_ptr<treeNode> NodePtr), std::shared_ptr<treeNode> treePtr) const;
+   std::string postorderTraverseHelper(std::string visit(std::shared_ptr<treeNode> NodePtr), std::shared_ptr<treeNode> treePtr) const;
 
-  std::shared_ptr<treeNode> findLongestValidParent(std::shared_ptr<treeNode> target, std::shared_ptr<treeNode> root);
+   std::shared_ptr<treeNode> findLongestValidParent(std::shared_ptr<treeNode> target, std::shared_ptr<treeNode> root);
+
+   std::shared_ptr<treeNode> removeHelper(std::shared_ptr<treeNode> subTreePtr, std::shared_ptr<treeNode> target);
    
 public:
 	//All the public methods listed in the starter code must be implemented by you.  
