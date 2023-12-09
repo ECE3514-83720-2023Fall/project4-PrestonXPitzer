@@ -108,11 +108,10 @@ std::shared_ptr<treeNode> prefixTree::addHelper(std::shared_ptr<treeNode> subTre
 		return newNodePtr;
 	}
 
-	int result = checkValue(newNodePtr, subTreePtr);
-	if (result == -1) { //if the nodes have equal netids, then update the port number
+	int result = checkValue(subTreePtr,newNodePtr);
+	if (result == 2) { //if the nodes have equal netids, then update the port number
 		subTreePtr->setPort(newNodePtr->getPort()); 
 		return subTreePtr; 
-		
 	}
 	if (result == 1) {
 		subTreePtr->setRightChildPtr(addHelper(subTreePtr->getRightChildPtr(), newNodePtr));
@@ -127,20 +126,25 @@ std::shared_ptr<treeNode> prefixTree::addHelper(std::shared_ptr<treeNode> subTre
 int prefixTree::checkValue(std::shared_ptr<treeNode> current, std::shared_ptr<treeNode> target) {
 	std::string currId = current->getNetId();
 	std::string targetId = target->getNetId();
-	if (currId == targetId) {
-		return -1;
+	//if the current node would be on the left of the target, return 0, if the current node would be on the right, return 1, if the current node should be a parent of the target, return -1, if they are equal return 2, otherwise return 3
+	if (currId == targetId) { //if the nodes have equal netids, then update the port number
+		return 2;
 	}
-	if (currId.compare(0, targetId.length(), targetId) == 0) {
-		if (currId.back() == '1') {
-			return 1;
-		}
-		else if (currId.back() == '0') {
+	else if (targetId.find(currId) != std::string::npos ) {
+		if (targetId.substr(currId.length(), 1) == "0") {
 			return 0;
 		}
+		else if (targetId.substr(currId.length(), 1) == "1") { 
+			return 1;
+		}
+		else {
+			return 3;
+		}
+	}
+	else {
+		return 3;
 	}
 
-	// Add a case for an invalid condition, or return a default value
-	return 2;
 }
 
 

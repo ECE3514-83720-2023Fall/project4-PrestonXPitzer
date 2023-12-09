@@ -8,6 +8,30 @@
 #include "treeNode.h"
 #include "hw4_datarecord.h"
 
+TEST_CASE("Test clear the prefix tree", "[clear]") {
+
+
+
+    prefixTree myTree; 
+    REQUIRE(myTree.add("", 0) == true); 
+    REQUIRE(myTree.add("0", 1) == true); 
+    REQUIRE(myTree.add("011", 2) == true); 
+    REQUIRE(myTree.add("1", 3) == true); 
+    REQUIRE(myTree.add("0001", 4) == true);
+    CHECK("0001:4\n011:2\n0:1\n1:3\n:0\n" == myTree.postorderTraverse(visitNode));
+
+    REQUIRE(myTree.getHeight() == 3);
+    REQUIRE(myTree.getNumberOfNodes() == 5);
+
+    myTree.clear();
+
+    REQUIRE(myTree.getHeight() == 0);
+    REQUIRE(myTree.getNumberOfNodes() == 0);
+
+    CHECK(myTree.isEmpty() == true);
+}
+
+
 TEST_CASE("Create a small tree", "[constructor]") {
     prefixTree tree;
     tree.add("",0);
@@ -41,7 +65,7 @@ TEST_CASE("Check postorder Traversal", "[prefixTree]") {
     tree.add("0011",18);
     std::string result;
     result = tree.postorderTraverse(visitNode);
-    //CHECK(result == "0000:15\n000:13\n00:6\n0:2\n111:12\n11:5\n1:1\n:0");
+    //CHECK(result == "0000:15\n000:13\n00:6\n0:2\n111:12\n11:5\n1:1\n:0\n");
     REQUIRE(1 == 1);
     }
 TEST_CASE("TreeNode constructors", "[treeNode]") {
@@ -78,4 +102,8 @@ TEST_CASE("Test Addition of Out of Order entries", "[PrefixTree]") {
     REQUIRE(myTree.add("011", 2) == true);
 	REQUIRE(myTree.add("", 0) == true);
 }
+
+
+
+
 
